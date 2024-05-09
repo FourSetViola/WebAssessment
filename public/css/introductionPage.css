@@ -5,6 +5,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow-x: hidden;
 }
 /* Make sure that the background fills the window of the browser*/
 
@@ -15,8 +16,8 @@ nav h1 {
 }
 
 nav a {
-    margin-top: 0;
-    font-size: 25px;
+    margin: 0 0 0 0;
+    font-size: 1vw;
 }
 
 nav {
@@ -27,6 +28,7 @@ nav {
     /* background-color: rgb(255, 255, 255, 0.3); */
     height: 10vh;
     margin: 0;
+    width: 100vw;
     /* backdrop-filter: blur(15px); */
 }
 
@@ -61,7 +63,7 @@ nav .links:hover {
     display: flex;
     /* justify-content: center; */
     align-items:end;   
-    width: 100%;
+    width: 100vw;
     height: 35vh;
     margin-top: 45vh;
     margin-bottom: 10vh;
@@ -72,12 +74,12 @@ nav .links:hover {
 }
 
 #welcome h2 {
-    font-size: 10vh;
+    font-size: 5vw;
     color: rgb(247, 247, 247);
     margin-top: 0vh;
     margin-bottom: 0vh;
     position: relative;
-    left: 10%;
+    left: 5%;
 
 }
 
@@ -87,7 +89,7 @@ nav .links:hover {
     position: absolute;
     top: 10vh;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 90vh;
     backdrop-filter: blur(5px);
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
