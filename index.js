@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const port = 8080;
 
 // specifying the static files directory
 app.use(express.static('public'));
@@ -19,6 +20,6 @@ app.get('/quiz', (req, res) => {
     res.sendFile(__dirname + '/public/quizApplicationPage.html');
 });
 
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
+app.listen(port, () => {
+    console.log('Server is running on port', port);
 });
