@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    background: url('../img/background3.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-x: hidden;
+}
+/* Make sure that the background fills the window of the browser*/
+
+nav h1 {
+    color: white;
+    align-items: center;
+    font-size: 40px;
+}
+
+nav a {
+    margin: 0 0 0 0;
+    font-size: 1vw;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background: linear-gradient(90deg, transparent, #dddddd4d, transparent); */
+    /* background-color: rgb(255, 255, 255, 0.3); */
+    height: 10vh;
+    margin: 0;
+    width: 100vw;
+    /* backdrop-filter: blur(15px); */
+}
+
+nav .links {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 70%;
+    text-decoration: none;
+    color: white;
+    width: 10%;
+    backdrop-filter: blur(10px);
+    border-radius: 2vw;
+    border: solid 2px white;
+}
+
+nav .links:hover {
+    text-decoration: underline;
+}
