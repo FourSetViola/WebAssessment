@@ -46,7 +46,19 @@ nav .links {
     border: solid 2px white;
 }
 
-nav .links:hover {
+@keyframes slideIn {
+    from {
+        transform: translateX(-5%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.links:hover {
+    animation: slideIn 0.5s linear forwards;
     text-decoration: underline;
 }
 
