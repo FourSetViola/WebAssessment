@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/quizPage.css" />
+    <title>Quiz Page</title>
+  </head>
+  <body>
+    <script src="js/quizApplicationPage.js"></script>
+    <header>
+      <nav>
+        <h1>Quiz Page</h1>
+        <a class="links" href="/">Introduction Page</a>
+        <a class="links" href="/aboutPage">About Page</a>
+        </nav>
+    </header>
+
+    <section>
+      <div class="page startMenu">
+        <h2>Welcome to the Quiz Page!</h2>
+        <p>For every question, you have 15 seconds to answer.<br>
+        You're free to submit your answer in advance, otherwise it's going to automatically be submitted after the time limit.<br>
+        You would know whether your answer is correct or not once you'be submitted.</p>
+        <p>Please enter your name here:</p>
+        <div class="nameInput">
+          <input type="text" id="name" name="name" required>
+          <input type="submit" class="nextButton" value="Start" onclick="startQuiz()">
+        </div>
+      </div>
+      <div class="page question">
+        <h2></h2>
+        <div class="options">
+        </div>
+        <button class="nextButton" onclick="nextQuestion()">Next</button> 
+      </div>
+    </section>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="js/quizApplicationPage.js"></script>
+    
+    <script>
+      const socket = io();
+      var idx = 0;
+      function startQuiz() {
+          var name = document.getElementById("name").value;
+          socket.emit("startQuiz", name);
+          const startMenu = document.querySelector(".startMenu");
+          startMenu.style.display = "none";
+          const question = document.querySelector(".question");
+          question.style.display = "grid";
+          renderQuestion(idx); 
+      }
+
+      function renderQuestion(idx) {
+        socket.emit("questionNeeded", idx);
+        socket.on("questionSent", (question) => {
+          const questionElement = document.querySelector(".question h2");
+          questionElement.innerHTML = question.question;
+
+          const options = document.querySelector(".options");
+          options.innerHTML = "";
+          // 为每个答案创建一个选项
+          question.answers.forEach((answer) => {
+          // 创建一个新的选项元素
+          const optionElement = document.createElement("div");
+          optionElement.className = "option";
+          // 创建一个新的单选按钮元素
+          const radioElement = document.createElement("input");
+          radioElement.type = "radio";
+          radioElement.name = "option";
+          radioElement.value = answer.idx;
+
+          // 创建一个新的标签元素
+          const labelElement = document.createElement("label");
+          labelElement.innerHTML = answer.answer;
+
+          // 将单选按钮和标签添加到选项元素
+          optionElement.appendChild(radioElement);
+          optionElement.appendChild(labelElement);
+
+          // 将选项元素添加到选项的容器
+          options.appendChild(optionElement);
+          });
+        });
+      }
+
+      function nextQuestion() {
+        idx += 1;
+        renderQuestion(idx);
+      }
+    </script>
+    </body>
+</html>
