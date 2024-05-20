@@ -16,26 +16,38 @@
     </header>
 
     <section>
+      <!-- The Start Menu of the Quiz -->
       <div class="page startMenu">
         <h2>Welcome to the Quiz Page!</h2>
-        <p>For every question, you have 15 seconds to answer.<br>
-        You're free to submit your answer in advance, otherwise it's going to automatically be submitted after the time limit.<br>
-        You would know whether your answer is correct or not once you'be submitted.</p>
+        <p>For every question, you have 15 seconds to answer.<p>
+        <p>Once you have clicked an option, your answer would be automatically submitted.
+        If you failed to answer the question in the time limit. it is marked as a wrong answer.</p>
+        <p>You would know whether your answer is correct or not once you've submitted.<br>
+        The quiz consists of 10 questions on English Football. Hope you'd enjoy it.</p>
         <p>Please enter your name here:</p>
         <div class="nameInput">
           <input type="text" id="name" name="name" required>
           <input type="submit" class="nextButton" value="Start" onclick="startQuiz()">
         </div>
       </div>
+      <!-- The Question Page -->
       <div class="page question">
         <h2></h2>
-        <div class="options">
-        </div>
-        <button class="nextButton" onclick="nextQuestion()">Next</button> 
+        <div class="options"></div>
+      </div>
+      <!-- The Result Page for Every Question Page -->
+      <div class="page result">
+        <h2 style="width: 100%; text-align: center;"></h2>
+        <button class="nextButton" onclick="nextQuestion()"><p>Next Question</p></button>
+      </div>
+      <!-- The End of the Quiz-->
+      <div class="page end">
+        <h2>End of the Quiz</h2>
       </div>
     </section>
 
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> Socket.io For Codio Server -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> <!--Socket.io For My Local Machine, works poor on codio-->
     <script src="js/quizApplicationPage.js"></script>
     
     <script>
@@ -56,6 +68,10 @@
       }
 
       function renderQuestion(idx) {
+        const result = document.querySelector(".result");
+        result.style.display = "none";
+        const question = document.querySelector(".question");
+        question.style.display = "grid";
         socket.emit("questionNeeded", idx);
         socket.on("questionSent", (question) => {
           const questionElement = document.querySelector(".question h2");
@@ -71,10 +87,43 @@
             optionElement.className = "option";
             optionElement.dataset.index = option.choice;
             optionElement.innerHTML = option.choice + ": " + option.answer;
+
+            //  Define the click events for the options
+            optionElement.addEventListener("click", () => {
+              clearTimeout(timeLimit);
+              socket.emit("answerSubmitted", {"idx": idx, "choice": option.choice});
+              optionElement.style.backgroundColor = "lightblue";
+              optionElement.style.color = "black";
+              optionElement.style.pointerEvents = "none";
+            });
+            // Add the options to the options box
             optionsBox.appendChild(optionElement);
           });
+          
         });
+        let timeLimit = setTimeout(() => {
+          showResult(false);
+        }, 15000);
       }
+
+      function showResult (verified) {
+        const question = document.querySelector(".question");
+        question.style.display = "none";
+        const result = document.querySelector(".result");
+        result.style.display = "grid";
+        const messageSpace = document.querySelector(".result h2");
+        const message = verified ? `<h2>Correct! Way to go!<h2>` : `<h2>Oops, seems like a wrong answer.<h2>`;
+        messageSpace.innerHTML = message;
+      }
+
+      // wait for the server to respone this answer
+      socket.on("answerVerified", (result) => {
+            if (result) {
+              showResult(true);
+            } else {
+              showResult(false);    
+            }
+          });
 
       function nextQuestion() {
         idx += 1;

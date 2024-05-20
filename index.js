@@ -48,6 +48,24 @@ io.on('connection', (socket) => {
             });
         });
     });
+    // handling the answer from the client
+    socket.on('answerSubmitted', (answer) => {
+        fs.readFile('questions.json', 'utf8', (err, fileData) => {
+            console.log(answer);
+            if (err) {
+                console.log(err);
+            } else {
+                const questionFile = JSON.parse(fileData);
+                let verified;
+                if (questionFile.questions[answer.idx].solution === answer.choice) {
+                    verified = true;
+                } else {
+                    verified = false;
+                }
+                socket.emit('answerVerified', verified);
+            }
+        });
+    });
 });
 
 http.listen(port, () => {
