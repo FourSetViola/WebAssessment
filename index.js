@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
                     } else {
                         socket.emit('questionSent', {
                         question: questionFile.questions[idx].question,
-                        answers: questionFile.questions[idx].answers.map(answer => ({idx: answer.idx, answer: answer.answer}))
+                        options: questionFile.questions[idx].options.map(option => ({choice: option.choice, answer: option.answer}))
                         });
                     }
                 }

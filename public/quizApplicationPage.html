@@ -43,6 +43,10 @@
       var idx = 0;
       function startQuiz() {
           var name = document.getElementById("name").value;
+          if (name === "") {
+            alert("Please enter your name!");
+            return;
+          }
           socket.emit("startQuiz", name);
           const startMenu = document.querySelector(".startMenu");
           startMenu.style.display = "none";
@@ -57,29 +61,17 @@
           const questionElement = document.querySelector(".question h2");
           questionElement.innerHTML = question.question;
 
-          const options = document.querySelector(".options");
-          options.innerHTML = "";
+          const optionsBox = document.querySelector(".options");
+          optionsBox.innerHTML = "";
           // 为每个答案创建一个选项
-          question.answers.forEach((answer) => {
-          // 创建一个新的选项元素
-          const optionElement = document.createElement("div");
-          optionElement.className = "option";
-          // 创建一个新的单选按钮元素
-          const radioElement = document.createElement("input");
-          radioElement.type = "radio";
-          radioElement.name = "option";
-          radioElement.value = answer.idx;
-
-          // 创建一个新的标签元素
-          const labelElement = document.createElement("label");
-          labelElement.innerHTML = answer.answer;
-
-          // 将单选按钮和标签添加到选项元素
-          optionElement.appendChild(radioElement);
-          optionElement.appendChild(labelElement);
-
-          // 将选项元素添加到选项的容器
-          options.appendChild(optionElement);
+          question.options.forEach((option) => {
+            // 创建一个新的选项元素
+            console.log(option);
+            const optionElement = document.createElement("div");
+            optionElement.className = "option";
+            optionElement.dataset.index = option.choice;
+            optionElement.innerHTML = option.choice + ": " + option.answer;
+            optionsBox.appendChild(optionElement);
           });
         });
       }

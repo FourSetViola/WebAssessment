@@ -1,245 +1,220 @@
 {
     "questions": [
         {
-            "idx": 0,
+            "index": 0,
             "question": "Which team has won the most Premier League titles?",
             "illustration": "",
-            "answers": [
+            "solution": "A",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Manchester United",
-                    "correct": true
+                    "choice": "A",
+                    "answer": "Manchester United"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Liverpool",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Liverpool"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Arsenal",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Arsenal"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Manchester City",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Manchester City"
                 }
             ]
         },
         {
-            "idx": 1,
+            "index": 1,
             "question": "Who was the last Premier League player to win the Ballon d'Or?",
             "illustration": "",
-            "answers": [
+            "solution": "C",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Eden Hazard",
-                    "correct": false
+                    "choice": "A",
+                    "answer": "Eden Hazard"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Michael Owen",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Michael Owen"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Cristiano Ronaldo",
-                    "correct": true
+                    "choice": "C",
+                    "answer": "Cristiano Ronaldo"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Jamie Carragher",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Jamie Carragher"
                 }
             ]
         },
         {
-            "idx": 2,
+            "index": 2,
             "question": "Which team has won the most FA Cup titles?",
             "illustration": "",
-            "answers": [
+            "solution":"A",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Arsenal",
-                    "correct": true
+                    "choice": "A",
+                    "answer": "Arsenal"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Manchester United",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Manchester United"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Chelsea",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Chelsea"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Liverpool",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Liverpool"
                 }
             ]
         },
         {
-            "idx": 3,
+            "index": 3,
             "question": "Who is the all-time top scorer in the Premier League?",
             "illustration": "",
-            "answers": [
+            "solution": "B",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Thierry Henry",
-                    "correct": false
+                    "choice": "A",
+                    "answer": "Thierry Henry"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Alan Shearer",
-                    "correct": true
+                    "choice": "B",
+                    "answer": "Alan Shearer"
+                    
                 },
                 {
-                    "idx": 2,
-                    "answer": "Wayne Rooney",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Wayne Rooney"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Kun Aguero",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Kun Aguero"
                 }
             ]
         },
         {
-            "idx": 4,
+            "index": 4,
             "question": "Who is the youngest player to score a Premier League goal?",
             "illustration": "",
-            "answers": [
+            "solution": "C",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Cesc Fabregas",
-                    "correct": false
+                    "choice": "A",
+                    "answer": "Cesc Fabregas"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Wayne Rooney",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Wayne Rooney"
                 },
                 {
-                    "idx": 2,
-                    "answer": "James Vaughan",
-                    "correct": true
+                    "choice": "C",
+                    "answer": "James Vaughan"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Michael Owen",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Michael Owen"
                 }
             ]
         },
         {
-            "idx": 5,
+            "index": 5,
             "question": "Which club has never won the UEFA Champions League?",
             "illustration": "",
-            "answers": [
+            "solution": "A",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Arsenal",
-                    "correct": true
+                    "choice": "A",
+                    "answer": "Arsenal"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Manchester United",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Manchester United"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Manchester City",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Manchester City"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Chelsea",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Chelsea"
                 }
             ]
         },
         {
-            "idx": 6,
+            "index": 6,
             "question": "Which manager in the Premier League has coached Aberdeen FC?",
             "illustration": "",
-            "answers": [
+            "solution": "C",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "David Moyes",
-                    "correct": false
+                    "choice": "A",
+                    "answer": "David Moyes"
                 },
                 {
-                    "idx": 1,
-                    "answer": "Brendan Rodgers",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Brendan Rodgers"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Sir Alex Ferguson",
-                    "correct": true
+                    "choice": "C",
+                    "answer": "Sir Alex Ferguson"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Arsene Wenger",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Arsene Wenger"
                 }
             ]
         }, 
         {
-            "idx": 7,
+            "index": 7,
             "question": "Who was the captain of the England national team that won the 1966 FIFA World Cup?",
             "illustration": "",
-            "answers": [
+            "solution": "A",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Bobby Moore",
-                    "correct": true
+                    "choice": "A",
+                    "answer": "Bobby Moore"  
                 },
                 {
-                    "idx": 1,
-                    "answer": "Geoff Hurst",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Geoff Hurst"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Gordon Banks",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Gordon Banks"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Bobby Charlton",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Bobby Charlton"
                 }
             ]
         },
         {
-            "idx": 8,
+            "index": 8,
             "question": "Who was the first Asian player to play in the UEFA Champions League Final?",
             "illustration": "",
-            "answers": [
+            "solution": "A",
+            "options": [
                 {
-                    "idx": 0,
-                    "answer": "Park Ji-Sung",
-                    "correct": true
+                    "choice": "A",
+                    "answer": "Park Ji-Sung"
+                    
                 },
                 {
-                    "idx": 1,
-                    "answer": "Shinji Kagawa",
-                    "correct": false
+                    "choice": "B",
+                    "answer": "Shinji Kagawa"
                 },
                 {
-                    "idx": 2,
-                    "answer": "Son Heung-Min",
-                    "correct": false
+                    "choice": "C",
+                    "answer": "Son Heung-Min"
                 },
                 {
-                    "idx": 3,
-                    "answer": "Wu Lei",
-                    "correct": false
+                    "choice": "D",
+                    "answer": "Wu Lei"
                 }
             ]
         }

@@ -73,6 +73,7 @@ section {
     grid-column: 1fr;
     justify-content: center;
     min-height: 80vh;
+    overflow-y: auto;
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     border-radius: 2vw;
@@ -87,6 +88,7 @@ section {
     margin-left: 10%;
     margin-right: 10%;
     font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 2%;
 }
 
 .startMenu p {
@@ -144,10 +146,19 @@ section {
 
 .question .options .option {
     display: flex;
-    width: 100%;
+    width: 30%;
+    height: 50%;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 2vw;
     color: black;
     font-family: 'Times New Roman', Times, serif;
+    background-color: royalblue;
+    border-radius: 2vw;
+    margin: 1vh 2vw 1vh 2vw;
+}
+
+.question .options .option:hover {
+    background-color: #4169E1;
+    cursor: pointer;
 }
