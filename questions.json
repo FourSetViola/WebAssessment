@@ -217,6 +217,30 @@
                     "answer": "Wu Lei"
                 }
             ]
+        },
+        {
+            "index": 9,
+            "question": "Whose head is this?",
+            "illustration": "img/guess1.png",
+            "solution": "B",
+            "options": [
+                {
+                    "choice": "A",
+                    "answer": "Pep Guardiola"
+                },
+                {
+                    "choice": "B",
+                    "answer": "Eric Ten Hag"
+                },
+                {
+                    "choice": "C",
+                    "answer": "Sofyan Amrabat"
+                },
+                {
+                    "choice": "D",
+                    "answer": "Arjen Robben"
+                }
+            ]
         }
     ]
 }

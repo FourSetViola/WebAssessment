@@ -33,6 +33,7 @@
       <!-- The Question Page -->
       <div class="page question">
         <h2></h2>
+        <div class="illustration"></div>
         <div class="options"></div>
         <div class="timer"></div>
       </div>
@@ -43,8 +44,17 @@
       </div>
       <!-- The End of the Quiz-->
       <div class="page end">
-        <h2>End of the Quiz</h2>
+        <h2 id="lastQuestion"></h2>
+        <h2>You have reached the end of this Quiz.</h2>
         <h2 id="score"></h2>
+        <h2>Quiz Leader Board</h2>
+        <table id="leaderBoard">
+          <tr>
+            <th><p>Username</p></th>
+            <th><p>Score</p></th>
+            <th><p>Time</p></th>
+          </tr>
+        </table>
       </div>
     </section>
 
@@ -56,7 +66,7 @@
       const socket = io();
       var idx = 0;
       var timeLimit;
-
+      
       function startQuiz() {
           var name = document.getElementById("name").value;
           if (name === "") {
@@ -84,6 +94,11 @@
           // render the question we received from the server
           const questionElement = document.querySelector(".question h2");
           questionElement.innerHTML = question.question;
+          // render the illustration if there is any
+          if (question.illustration) {
+            const illustration = document.querySelector(".illustration");
+            illustration.innerHTML = `<img src="${question.illustration}" alt="illustration">`;
+          }
           // create an optionElement for every option
           question.options.forEach((option) => {
             // creation of the option element
@@ -108,20 +123,21 @@
         const timer = document.querySelector(".timer");
         timer.classList.add("timer-animation");
         timeLimit = setTimeout(() => {
-          showResult(false);
+          socket.emit('answerSubmitted', {"idx": idx, "choice": "timeout"});
         }, 15000);
       }
 
-      function showResult (verified) {
-        // initialize the pages
-        const question = document.querySelector(".question");
-        question.style.display = "none";
+      function showResult(verified) {
+        const questionPage = document.querySelector(".question");
+        questionPage.style.display = "none";
         const result = document.querySelector(".result");
         result.style.display = "grid";
-        const messageSpace = document.querySelector(".result h2");
-        // Show corresponding messsage on the outcome of the question
-        const message = verified ? `<h2>Correct! Way to go!<h2>` : `<h2>Oops, seems like a wrong answer.<h2>`;
-        messageSpace.innerHTML = message;
+        const resultElement = document.querySelector(".result h2");
+        if (verified) {
+          resultElement.innerHTML = "Correct Answer! Way to go!";
+        } else {
+          resultElement.innerHTML = "Oops! Seems like a wrong answer.";
+        }
       }
 
       // wait for the server to respone this answer
@@ -142,17 +158,36 @@
         renderQuestion(idx);
         socket.on("quizEnded", (scoreMessage) => {
           clearTimeout(timeLimit);
+          const questionPage = document.querySelector(".question");
+          questionPage.style.display = "none";
+          const lastQuestion = document.getElementById("lastQuestion");
+          const message = scoreMessage.verified ? "Correct! A decisive goal!" : "Oops! Seems like a wrong answer.";
+          lastQuestion.innerHTML = message;
           const result = document.querySelector(".result");
           result.style.display = "none";
           const end = document.querySelector(".end");
           end.style.display = "grid";
           const score = document.getElementById("score");
-          score.innerHTML = `<h2>You got ${scoreMessage.count} out of ${scoreMessage.total} right!<h2>`;
+          score.innerHTML = `You got ${scoreMessage.count} out of ${scoreMessage.total} right!`;
         });
       }
 
       socket.on('leaderBoard', (leaders) => {
         console.log(leaders);
+        const leaderBoard = document.getElementById('leaderBoard');
+        leaders.forEach((leader) => {
+          const row = document.createElement("tr");
+          const name = document.createElement("td");
+          name.innerHTML = leader.name;
+          const score = document.createElement("td");
+          score.innerHTML = leader.count;
+          const time = document.createElement("td");
+          time.innerHTML = `${leader.time}s`;
+          row.appendChild(name);
+          row.appendChild(score);
+          row.appendChild(time);
+          leaderBoard.appendChild(row);
+        });
       });
     </script>
     </body>

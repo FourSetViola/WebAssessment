@@ -50,25 +50,25 @@
         },
         {
             "index": 2,
-            "question": "Which team has won the most FA Cup titles?",
-            "illustration": "",
-            "solution":"A",
+            "question": "Whose head is this?",
+            "illustration": "img/guess1.png",
+            "solution": "B",
             "options": [
                 {
                     "choice": "A",
-                    "answer": "Arsenal"
+                    "answer": "Pep Guardiola"
                 },
                 {
                     "choice": "B",
-                    "answer": "Manchester United"
+                    "answer": "Eric Ten Hag"
                 },
                 {
                     "choice": "C",
-                    "answer": "Chelsea"
+                    "answer": "Sofyan Amrabat"
                 },
                 {
                     "choice": "D",
-                    "answer": "Liverpool"
+                    "answer": "Arjen Robben"
                 }
             ]
         }

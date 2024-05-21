@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const bodyParser = require('body-parser');
 const fs = require('fs');
-const { count } = require('console');
 const port = 8080;
 
 // specifying the static files directory
@@ -32,17 +30,42 @@ io.on('connection', (socket) => {
 
     socket.on('startQuiz', (name) => {
         console.log(`${name} has started the quiz.`);
-        let startTime = Date.now();
+        const startTime = Date.now();
         socket.on('questionNeeded', (idx) => {
             fs.readFile('questionsForQuickTesting.json', 'utf8', (err, data) => {
                 if (err) {
                     console.log(err);
                 } else {
                     const questionFile = JSON.parse(data);
-                    if (idx === questionFile.questions.length) {
-                        socket.emit('quizEnded', {count: count, total: questionFile.questions.length});
-                        let endTime = Date.now();
-                        let timeCost = endTime - startTime;
+                    socket.emit('questionSent', {
+                        question: questionFile.questions[idx].question,
+                        options: questionFile.questions[idx].options.map(option => ({choice: option.choice, answer: option.answer})),
+                        illustration: questionFile.questions[idx].illustration
+                    });
+                }
+            });
+        });
+        
+        // handling the answer from the client
+        socket.on('answerSubmitted', (answer) => {
+            fs.readFile('questionsForQuickTesting.json', 'utf8', (err, fileData) => {
+                console.log(answer);
+                if (err) {
+                    console.log(err);
+                } else {
+                    const questionFile = JSON.parse(fileData);
+                    var verified;
+                    if (questionFile.questions[answer.idx].solution === answer.choice) {
+                        verified = true;
+                        count += 1;
+                    } else {
+                        verified = false;
+                    }
+                    if (answer.idx === questionFile.questions.length-1) {
+                        const endTime = Date.now();
+                        const timeCost = (endTime - startTime) / 1000;
+                        console.log(verified);
+                        socket.emit('quizEnded', {verified: verified, count: count, total: questionFile.questions.length});
                         fs.readFile('ranking.json', 'utf8', (err, data) => {
                             if (err) {
                                 console.log(err);
@@ -55,7 +78,7 @@ io.on('connection', (socket) => {
                                     if (err) {
                                         console.log(err);
                                     } else {
-                                         console.log(`${name} took ${timeCost}s to finish to quiz, ${count} right answers out of ${questionFile.questions.length}`)
+                                        console.log(`${name} took ${timeCost}s to finish to quiz, ${count} right answers out of ${questionFile.questions.length}`)
                                     }
                                 });
                                 // sort the users file on their correct answers and time cost
@@ -75,35 +98,12 @@ io.on('connection', (socket) => {
                                 }
                                 socket.emit('leaderBoard', leaders);
                             }
-                        })
-                        return;
-                    } else {
-                        socket.emit('questionSent', {
-                        question: questionFile.questions[idx].question,
-                        options: questionFile.questions[idx].options.map(option => ({choice: option.choice, answer: option.answer}))
                         });
+                    } else {
+                        socket.emit('answerVerified', verified);
                     }
                 }
             });
-        });
-    });
-    // handling the answer from the client
-    socket.on('answerSubmitted', (answer) => {
-        fs.readFile('questions.json', 'utf8', (err, fileData) => {
-            console.log(answer);
-            if (err) {
-                console.log(err);
-            } else {
-                const questionFile = JSON.parse(fileData);
-                let verified;
-                if (questionFile.questions[answer.idx].solution === answer.choice) {
-                    verified = true;
-                    count += 1;
-                } else {
-                    verified = false;
-                }
-                socket.emit('answerVerified', verified);
-            }
         });
     });
 });
