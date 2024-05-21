@@ -62,7 +62,7 @@ nav .links:hover {
 
 section {
     margin-top: 5vh;
-    height: 80vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -90,6 +90,25 @@ section {
     margin-right: 10%;
     font-family: 'Times New Roman', Times, serif;
     margin-bottom: 2%;
+}
+
+.question .timer {
+    background-color: red;
+    height: 2vh;
+    border-radius: 2vh;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+@keyframes timer-animation {
+    0% { width: 80%; }
+    100% { width: 0; }
+  }
+  
+.timer-animation {
+    animation: timer-animation 15s linear forwards;
 }
 
 .startMenu p {
@@ -145,6 +164,10 @@ section {
 
 .question {
     display: none;
+}
+
+.question h2 {
+    font-size: 3rem;
 }
 
 .question .options {

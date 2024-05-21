@@ -34,6 +34,7 @@
       <div class="page question">
         <h2></h2>
         <div class="options"></div>
+        <div class="timer"></div>
       </div>
       <!-- The Result Page for Every Question Page -->
       <div class="page result">
@@ -43,6 +44,7 @@
       <!-- The End of the Quiz-->
       <div class="page end">
         <h2>End of the Quiz</h2>
+        <h2 id="score"></h2>
       </div>
     </section>
 
@@ -53,6 +55,8 @@
     <script>
       const socket = io();
       var idx = 0;
+      var timeLimit;
+
       function startQuiz() {
           var name = document.getElementById("name").value;
           if (name === "") {
@@ -62,27 +66,27 @@
           socket.emit("startQuiz", name);
           const startMenu = document.querySelector(".startMenu");
           startMenu.style.display = "none";
-          const question = document.querySelector(".question");
-          question.style.display = "grid";
           renderQuestion(idx); 
       }
 
       function renderQuestion(idx) {
-        const result = document.querySelector(".result");
-        result.style.display = "none";
-        const question = document.querySelector(".question");
-        question.style.display = "grid";
+        // inform the server that we need a new question
         socket.emit("questionNeeded", idx);
+        // execute when we received a new question from the server
         socket.on("questionSent", (question) => {
-          const questionElement = document.querySelector(".question h2");
-          questionElement.innerHTML = question.question;
-
+          // initialize the pages
+          const result = document.querySelector(".result");
+          result.style.display = "none";
+          const questionPage = document.querySelector(".question");
+          questionPage.style.display = "grid";
           const optionsBox = document.querySelector(".options");
           optionsBox.innerHTML = "";
-          // 为每个答案创建一个选项
+          // render the question we received from the server
+          const questionElement = document.querySelector(".question h2");
+          questionElement.innerHTML = question.question;
+          // create an optionElement for every option
           question.options.forEach((option) => {
-            // 创建一个新的选项元素
-            console.log(option);
+            // creation of the option element
             const optionElement = document.createElement("div");
             optionElement.className = "option";
             optionElement.dataset.index = option.choice;
@@ -99,36 +103,57 @@
             // Add the options to the options box
             optionsBox.appendChild(optionElement);
           });
-          
         });
-        let timeLimit = setTimeout(() => {
+        // Trigger the timer animation
+        const timer = document.querySelector(".timer");
+        timer.classList.add("timer-animation");
+        timeLimit = setTimeout(() => {
           showResult(false);
         }, 15000);
       }
 
       function showResult (verified) {
+        // initialize the pages
         const question = document.querySelector(".question");
         question.style.display = "none";
         const result = document.querySelector(".result");
         result.style.display = "grid";
         const messageSpace = document.querySelector(".result h2");
+        // Show corresponding messsage on the outcome of the question
         const message = verified ? `<h2>Correct! Way to go!<h2>` : `<h2>Oops, seems like a wrong answer.<h2>`;
         messageSpace.innerHTML = message;
       }
 
       // wait for the server to respone this answer
       socket.on("answerVerified", (result) => {
-            if (result) {
-              showResult(true);
-            } else {
-              showResult(false);    
-            }
-          });
-
+        if (result) {
+          showResult(true);
+          } else {
+          showResult(false);    
+          }
+        });
+      
+      // when the button is clicked
       function nextQuestion() {
+        // move on to next page, index out of bound case is handled at the server side,
+        // the client does not need to know how many questions there are
         idx += 1;
+        // wait for the ending signal of the quiz
         renderQuestion(idx);
+        socket.on("quizEnded", (scoreMessage) => {
+          clearTimeout(timeLimit);
+          const result = document.querySelector(".result");
+          result.style.display = "none";
+          const end = document.querySelector(".end");
+          end.style.display = "grid";
+          const score = document.getElementById("score");
+          score.innerHTML = `<h2>You got ${scoreMessage.count} out of ${scoreMessage.total} right!<h2>`;
+        });
       }
+
+      socket.on('leaderBoard', (leaders) => {
+        console.log(leaders);
+      });
     </script>
     </body>
 </html>
