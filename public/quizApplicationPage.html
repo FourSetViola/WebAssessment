@@ -168,12 +168,11 @@
           const end = document.querySelector(".end");
           end.style.display = "grid";
           const score = document.getElementById("score");
-          score.innerHTML = `You got ${scoreMessage.count} out of ${scoreMessage.total} right!`;
+          score.innerHTML = `You got ${scoreMessage.count} out of ${scoreMessage.total} right in ${scoreMessage.time} seconds!`;
         });
       }
 
       socket.on('leaderBoard', (leaders) => {
-        console.log(leaders);
         const leaderBoard = document.getElementById('leaderBoard');
         leaders.forEach((leader) => {
           const row = document.createElement("tr");

@@ -64,41 +64,8 @@ io.on('connection', (socket) => {
                     if (answer.idx === questionFile.questions.length-1) {
                         const endTime = Date.now();
                         const timeCost = (endTime - startTime) / 1000;
-                        console.log(verified);
-                        socket.emit('quizEnded', {verified: verified, count: count, total: questionFile.questions.length});
-                        fs.readFile('ranking.json', 'utf8', (err, data) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                let ranking = JSON.parse(data);
-                                const user = {"name": name, "count": count, "time": timeCost};
-                                ranking.users.push(user);
-                                // update the users file
-                                fs.writeFile('ranking.json', JSON.stringify(ranking, null, 2), (err) => {
-                                    if (err) {
-                                        console.log(err);
-                                    } else {
-                                        console.log(`${name} took ${timeCost}s to finish to quiz, ${count} right answers out of ${questionFile.questions.length}`)
-                                    }
-                                });
-                                // sort the users file on their correct answers and time cost
-                                ranking.users.sort((userA, userB) => {
-                                    if (userA.count === userB.count) {
-                                        return userA.time - userB.time;
-                                    } else {
-                                        return userB.count - userA.count;
-                                    }
-                                });
-                                // emit the leaderboard to the client
-                                let j;
-                                j = ranking.users.length < 3 ? ranking.users.length-1 : 2;
-                                var leaders = [];
-                                for (let i=0; i<=j; i++) {
-                                    leaders.push(ranking.users[i]);
-                                }
-                                socket.emit('leaderBoard', leaders);
-                            }
-                        });
+                        socket.emit('quizEnded', {verified: verified, count: count, total: questionFile.questions.length, time: timeCost});
+                        updateLeaderboard(socket, questionFile, name, timeCost, count);
                     } else {
                         socket.emit('answerVerified', verified);
                     }
@@ -107,6 +74,43 @@ io.on('connection', (socket) => {
         });
     });
 });
+
+// after the quiz ended, ranking.json is updated
+function updateLeaderboard(socket, questionFile, name, timeCost, count) {
+    fs.readFile('ranking.json', 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            let ranking = JSON.parse(data);
+            const user = {"name": name, "count": count, "time": timeCost};
+            ranking.users.push(user);
+            // update the users file
+            fs.writeFile('ranking.json', JSON.stringify(ranking, null, 2), (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(`${name} took ${timeCost}s to finish to quiz, ${count} right answers out of ${questionFile.questions.length}`)
+                }
+            });
+            // sort the users file on their correct answers and time cost
+            ranking.users.sort((userA, userB) => {
+                if (userA.count === userB.count) {
+                    return userA.time - userB.time;
+                } else {
+                    return userB.count - userA.count;
+                }
+            });
+            // emit the leaderboard to the client
+            let j;
+            j = ranking.users.length < 3 ? ranking.users.length-1 : 2;
+            var leaders = [];
+            for (let i=0; i<=j; i++) {
+                leaders.push(ranking.users[i]);
+            }
+            socket.emit('leaderBoard', leaders);
+        }
+    });
+}
 
 http.listen(port, () => {
     console.log('Server is running on port', port);

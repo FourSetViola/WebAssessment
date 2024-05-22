@@ -209,6 +209,7 @@ section {
 
 .end {
     display: none;
+    justify-items: center;
 }
 
 .end h2 {

@@ -2,23 +2,13 @@
   "users": [
     {
       "name": "AnonChan",
-      "count": 9,
-      "time": 20.932
+      "count": 3,
+      "time": 4.13
     },
     {
       "name": "AnonChan",
-      "count": 7,
-      "time": 7.683
-    },
-    {
-      "name": "AnonChan",
-      "count": 4,
-      "time": 26.698
-    },
-    {
-      "name": "123",
-      "count": 5,
-      "time": 22.159
+      "count": 3,
+      "time": 4.159
     }
   ]
 }
