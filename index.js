@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
         console.log(`${name} has started the quiz.`);
         const startTime = Date.now();
         socket.on('questionNeeded', (idx) => {
-            fs.readFile('questionsForQuickTesting.json', 'utf8', (err, data) => {
+            fs.readFile('questions.json', 'utf8', (err, data) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
         
         // handling the answer from the client
         socket.on('answerSubmitted', (answer) => {
-            fs.readFile('questionsForQuickTesting.json', 'utf8', (err, fileData) => {
+            fs.readFile('questions.json', 'utf8', (err, fileData) => {
                 console.log(answer);
                 if (err) {
                     console.log(err);
