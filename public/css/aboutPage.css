@@ -1,9 +1,6 @@
 body {
     margin: 0;
     background: url('../img/background4.jpg') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     overflow-x: hidden;
 }
@@ -28,7 +25,6 @@ nav {
     height: 10vh;
     margin: 0;
     width: 100vw;
-    /* backdrop-filter: blur(3px); */
 }
 
 nav .links {
@@ -44,11 +40,13 @@ nav .links {
     border: solid 2px white;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
     from {
+        transform: translateX(-5%);
         opacity: 0;
     }
     to {
+        transform: translateX(0);
         opacity: 1;
     }
 }
@@ -122,9 +120,7 @@ td {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* background-color: rgba(201, 201, 201, 0.6); */
     background-color: rgb(235, 235, 235);
-    /* backdrop-filter: blur(20px); */
 }
 
 td p{

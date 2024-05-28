@@ -7,6 +7,7 @@
   </head>
   <body>
     <script src="js/quizApplicationPage.js"></script>
+    <!-- The navigation bar -->
     <header>
       <nav>
         <h1>Quiz Page</h1>
@@ -23,7 +24,7 @@
         <p>Once you have clicked an option, your answer would be automatically submitted.
         If you failed to answer the question in the time limit. it is marked as a wrong answer.</p>
         <p>You would know whether your answer is correct or not once you've submitted.<br>
-        The quiz consists of 10 questions on English Football. Hope you'd enjoy it.</p>
+        The quiz consists of 10 questions on Football. Hope you'd enjoy it.</p>
         <p>Please enter your name here:</p>
         <div class="nameInput">
           <input type="text" id="name" name="name" required>
@@ -67,6 +68,7 @@
       var idx = 0;
       var timeLimit;
       
+      // start the quiz
       function startQuiz() {
           var name = document.getElementById("name").value;
           if (name === "") {
@@ -126,7 +128,8 @@
           socket.emit('answerSubmitted', {"idx": idx, "choice": "timeout"});
         }, 15000);
       }
-
+      
+      // show the result after each question
       function showResult(verified) {
         const questionPage = document.querySelector(".question");
         questionPage.style.display = "none";
@@ -171,7 +174,8 @@
           score.innerHTML = `You got ${scoreMessage.count} out of ${scoreMessage.total} right in ${scoreMessage.time} seconds!`;
         });
       }
-
+      
+      // create the leaderBoard
       socket.on('leaderBoard', (leaders) => {
         const leaderBoard = document.getElementById('leaderBoard');
         leaders.forEach((leader) => {
