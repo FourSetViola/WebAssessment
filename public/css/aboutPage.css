@@ -62,10 +62,9 @@ nav .links:hover {
     justify-items: center;
 }
 
-section * {
+/* .overview * {
     margin: 2vw;
-    
-}
+} */
 
 article {
     background-color:rgba(201, 201, 201, 0.8);
@@ -75,6 +74,7 @@ article {
     flex-wrap: wrap;
     justify-items: center;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    margin: 2vw;
 }
 
 article * {
@@ -92,25 +92,31 @@ aside {
     border-radius: 15px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    margin: 2vw;
 }
 
 aside img {
     width: 80%;
     object-fit: contain;
     padding: 1vw;
+    margin: 2vw;
 }
+
+/* .album * {
+    margin: 2vw;
+} */
 
 .album{
     justify-items: center;
     margin-left: 0;
     margin-right: 0;
+    margin: 2vw;
 }
 
 tr {
     width: 100%;
     display: flex;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 2vw 0 2vw 0;
 }
 
 td {
