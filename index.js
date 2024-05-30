@@ -101,8 +101,7 @@ function updateLeaderboard(socket, questionFile, name, timeCost, count) {
                 }
             });
             // emit the leaderboard to the client
-            let j;
-            j = ranking.users.length < 3 ? ranking.users.length-1 : 2;
+            let j = ranking.users.length-1;
             var leaders = [];
             for (let i=0; i<=j; i++) {
                 leaders.push(ranking.users[i]);

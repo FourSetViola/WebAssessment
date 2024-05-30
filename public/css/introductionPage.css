@@ -14,8 +14,7 @@ nav h1 {
 
 nav a {
     margin: 0 0 0 0;
-    font-size: 2vh;
-    overflow-x: hidden;
+    font-size: 1vw;
 }
 
 nav {
@@ -40,6 +39,7 @@ nav .links {
     border: solid 2px white;
 }
 
+/* animation for nav buttons */
 @keyframes slideIn {
     from {
         transform: translateX(-5%);
@@ -52,10 +52,13 @@ nav .links {
 }
 
 .links:hover {
+    /* when the mouse is hovering over, the nav buttons
+    show up with corresponding animation */
     animation: slideIn 0.5s linear forwards;
     text-decoration: underline;
 }
 
+/* animation when the website is loading */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -76,6 +79,7 @@ nav .links {
 }
 
 #scrollGuide {
+    /* set the z-index so that is not covered by the pseudo element */
     z-index: 2;
     height: 10vh;
     display: flex;
@@ -83,6 +87,7 @@ nav .links {
     align-content: center;
 }
 
+/* animation for the scroll button */
 @keyframes jump {
     0% {
         transform: translateY(-25%);
@@ -98,11 +103,13 @@ nav .links {
     border: 0;
 }
 
+/* jumps over and over to catch attention */
 #scrollButton img {
     height: 100%;
     animation: jump 1s ease-in-out infinite;
 }
 
+/* notice the user that this is clickable */
 #scrollButton:hover {
     cursor: pointer;
 }
@@ -117,6 +124,8 @@ nav .links {
 
 }
 
+
+/* pseudo element to make the background looks more clear */
 #welcome::after {
     z-index: -1;
     content: "";
@@ -129,6 +138,7 @@ nav .links {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
+/* where all the contents are */
 .sectionContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -158,6 +168,8 @@ nav .links {
     border: 2px solid white;
 }
 
+
+/* grows if mouse is hovering */
 .block img:hover {
     transform: scale(1.1);
     transition: transform 0.5s;

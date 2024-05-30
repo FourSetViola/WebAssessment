@@ -40,6 +40,7 @@ nav .links {
     border: solid 2px white;
 }
 
+/* animation for nav buttons */
 @keyframes slideIn {
     from {
         transform: translateX(-5%);
@@ -52,6 +53,8 @@ nav .links {
 }
 
 nav .links:hover {
+    /* when the mouse is hovering over, the nav buttons
+    show up with corresponding animation */
     animation: slideIn 0.5s linear forwards;
     text-decoration: underline;
 }
@@ -61,10 +64,6 @@ nav .links:hover {
     grid-template-columns: 1fr 1fr;
     justify-items: center;
 }
-
-/* .overview * {
-    margin: 2vw;
-} */
 
 article {
     background-color:rgba(201, 201, 201, 0.8);
@@ -88,6 +87,7 @@ aside {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    /* to make them display in one column */
     background-color: rgba(201, 201, 201, 0.6);
     border-radius: 15px;
     backdrop-filter: blur(20px);
@@ -101,10 +101,6 @@ aside img {
     padding: 1vw;
     margin: 2vw;
 }
-
-/* .album * {
-    margin: 2vw;
-} */
 
 .album{
     justify-items: center;
@@ -143,6 +139,8 @@ td p{
     margin: 0;
 }
 
+
+/* grows if mouse is hovering over */
 td:hover {
     transform: scale(1.05);
     transition: transform 0.3s;

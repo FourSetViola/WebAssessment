@@ -49,13 +49,16 @@
         <h2>You have reached the end of this Quiz.</h2>
         <h2 id="score">Failed to fetch score</h2>
         <h2>Quiz Leader Board</h2>
-        <table id="leaderBoard">
-          <tr>
-            <th><p>Username</p></th>
-            <th><p>Score</p></th>
-            <th><p>Time</p></th>
-          </tr>
-        </table>
+        <div id="boardContainer">
+          <table id="leaderBoard">
+            <tr>
+              <th><p>Rank<p></th>
+              <th><p>Username</p></th>
+              <th><p>Score</p></th>
+              <th><p>Time</p></th>
+            </tr>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -178,14 +181,17 @@
       // create the leaderBoard
       socket.on('leaderBoard', (leaders) => {
         const leaderBoard = document.getElementById('leaderBoard');
-        leaders.forEach((leader) => {
+        leaders.forEach((leader, index) => {
           const row = document.createElement("tr");
+          const rank = document.createElement("td");
+          rank.innerHTML = index+1;
           const name = document.createElement("td");
           name.innerHTML = leader.name;
           const score = document.createElement("td");
           score.innerHTML = leader.count;
           const time = document.createElement("td");
           time.innerHTML = `${leader.time}s`;
+          row.appendChild(rank);
           row.appendChild(name);
           row.appendChild(score);
           row.appendChild(time);

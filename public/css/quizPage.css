@@ -40,6 +40,7 @@ nav .links {
     border: solid 2px white;
 }
 
+/* animation for the nav buttons */
 @keyframes slideIn {
     from {
         transform: translateX(-5%);
@@ -52,6 +53,7 @@ nav .links {
 }
 
 nav .links:hover {
+    /* triggers if mouse hovering */
     animation: slideIn 0.5s linear forwards;
     text-decoration: underline;
 }
@@ -95,11 +97,13 @@ section {
     justify-self: left;
 }
 
+/* the animation for the timer */
 @keyframes timer-animation {
     0% { width: 80%; }
     100% { width: 0; }
   }
   
+/* the time limit */
 .timer-animation {
     animation: timer-animation 15s linear forwards;
 }
@@ -164,9 +168,12 @@ section {
     font-size: 3rem;
 }
 
+/* set the width of the image by the width
+of the screen so it does not get too big */
 .question img {
     width: 20vw;
 }
+
 .question .options {
     display: flex;
     justify-content: center;
@@ -175,6 +182,8 @@ section {
     flex-wrap: wrap;
 }
 
+
+/* the option button for questions */
 .question .options .option {
     display: flex;
     width: 30%;
@@ -212,9 +221,19 @@ section {
     width: fit-content;
 }
 
-#leaderBoard {
+.end h2{
+    font-size: 1.5rem;
+}
+
+#boardContainer {
     width: 80%;
+    max-height: 18rem;
+    overflow-y: scroll;
     margin-bottom: 3vh;
+}
+
+#leaderBoard {
+    width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
 }
@@ -232,6 +251,8 @@ section {
 #leaderBoard tr{
     background-color: #f2f2f2;
 }
+
+/* highlight the current column */
 #leaderBoard tr:hover {
     background-color: #ddd;
 }
